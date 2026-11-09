@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Andy Huynh, UGC creator in Philadelphia</title>
+<meta name="description" content="Andy Huynh scripts, films and edits short vertical videos for brands, from Philadelphia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23caa26c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=gambarino@400&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="main.js" defer></script>
+</head>
+<body>
+
+<header class="hero" id="top" data-stage>
+  <nav class="nav" aria-label="Page">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+    <button type="button" class="nav__toggle" aria-pressed="false" data-blonde>Wear the lion</button>
+  </nav>
+  <h1 class="hero__name" data-fit><span class="line" data-line style="--i:0">Andy</span> <span class="line" data-line style="--i:1">Huynh</span></h1>
+  <figure class="portrait">
+    <img class="portrait__base" src="assets/andy.webp" width="1199" height="1492" alt="Andy Huynh from the chest up, in a black knit sweater" fetchpriority="high">
+    <canvas class="portrait__gold" data-src="assets/andy-lion.webp" aria-hidden="true"></canvas>
+  </figure>
+  <div class="hero__row">
+    <p class="hero__lede" data-load style="--d:420ms">UGC creator in Philadelphia who scripts, films and edits short vertical videos for brands.</p>
+    <a class="button" href="#contact" data-load style="--d:500ms">Work with me</a>
+  </div>
+</header>
+
+<main>
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="about__card">
+      <div class="about__text" data-reveal>
+        <h2 class="about__title" id="about-title">Hi, I&rsquo;m Andy.</h2>
+        <p class="about__body">I&rsquo;m a UGC creator from Philadelphia, PA. I don&rsquo;t just make videos about fitness, tech, music, studying and fashion. I&rsquo;m genuinely passionate about all of them.</p>
+      </div>
+      <figure class="about__photo" data-reveal style="--i:1"><img src="assets/about-andy.jpg" width="507" height="665" alt="Andy sitting on the floor holding a small pet" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <section class="work" id="work" aria-labelledby="work-title" data-reels>
+    <div class="work__head">
+      <h2 class="work__title" id="work-title">Work</h2>
+      <p class="work__cat" aria-live="polite" data-cat>Fitness</p>
+    </div>
+    <div class="reels" data-ring tabindex="0" aria-roledescription="carousel" aria-label="Reels by niche. Drag or use the arrow keys.">
+      <div class="reels__track">
+        <figure class="reel" data-cat="Fitness">
+          <video src="assets/work/fitness.mp4" poster="assets/work/fitness.jpg" preload="metadata" playsinline loop></video>
+          <button type="button" class="reel__play" aria-label="Play the fitness reel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button>
+          <figcaption class="reel__cap">Fitness</figcaption>
+        </figure>
+        <figure class="reel" data-cat="Tech">
+          <video src="assets/work/tech.mp4" poster="assets/work/tech.jpg" preload="metadata" playsinline loop></video>
+          <button type="button" class="reel__play" aria-label="Play the tech reel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button>
+          <figcaption class="reel__cap">Tech</figcaption>
+        </figure>
+        <figure class="reel" data-cat="Music">
+          <video src="assets/work/music.mp4" poster="assets/work/music.jpg" preload="metadata" playsinline loop></video>
+          <button type="button" class="reel__play" aria-label="Play the music reel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button>
+          <figcaption class="reel__cap">Music</figcaption>
+        </figure>
+        <figure class="reel" data-cat="Studying">
+          <video src="assets/work/study.mp4" poster="assets/work/study.jpg" preload="metadata" playsinline loop></video>
+          <button type="button" class="reel__play" aria-label="Play the studying reel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button>
+          <figcaption class="reel__cap">Studying</figcaption>
+        </figure>
+        <figure class="reel" data-cat="Fashion">
+          <video src="assets/work/fashion.mp4" poster="assets/work/fashion.jpg" preload="metadata" playsinline loop></video>
+          <button type="button" class="reel__play" aria-label="Play the fashion reel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button>
+          <figcaption class="reel__cap">Fashion</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="reels__nav">
+      <button type="button" class="reels__btn" data-step="-1" aria-label="Previous reel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M12 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
+      <p class="reels__hint">Drag to spin. Tap the front reel to play it.</p>
+      <button type="button" class="reels__btn" data-step="1" aria-label="Next reel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="contact__card" data-reveal>
+      <h2 class="contact__title" id="contact-title"><span>Let&rsquo;s</span> <span>work</span></h2>
+      <div class="contact__who">
+        <p class="contact__name">Andy Huynh</p>
+        <p class="contact__handle">@aeiyech on all platforms</p>
+        <ul class="contact__links">
+          <li><a href="https://www.instagram.com/aeiyech/">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@aeiyech">TikTok</a></li>
+          <li><a href="https://www.youtube.com/@aeiyech">YouTube</a></li>
+        </ul>
+      </div>
+      <a class="contact__mail" href="mailto:business.andyh@gmail.com">business.andyh@gmail.com</a>
+      <figure class="contact__photo"><img src="assets/contact-andy.jpg" width="736" height="1300" alt="Andy with bleached blonde hair in a black jacket" loading="lazy"></figure>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p class="footer__name" data-fit aria-hidden="true"><span class="line">Andy</span> <span class="line">Huynh</span></p>
+  <div class="footer__row">
+    <p>© 2026 Andy Huynh</p>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+</body>
+</html>

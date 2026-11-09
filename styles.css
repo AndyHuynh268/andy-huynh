@@ -1,0 +1,373 @@
+/* Andy Huynh, UGC portfolio.
+   Direction: the name as a monument (tasteskill, seed 361725372).
+   Live thing: the cursor uncovers a Lunar New Year lion dance head. */
+
+:root {
+  /* Dark mode: the same stones, inverted. */
+  --bg: #0f0e0d;
+  --surface: #191816;
+  --ink: #eeecea;
+  --muted: #a39e98;
+  --field-1: #24221f;
+  --accent: #caa26c;            /* lion-dance gold, used on the action only */
+  --accent-ink: #0f0e0d;
+
+  --margin: 24px;
+  --gutter: 24px;
+
+  --display: "Gambarino", "Iowan Old Style", "Times New Roman", serif;
+  --text: "General Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --step-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.375rem, 1rem + 1.4vw, 2.25rem);
+  --step-head: clamp(2.75rem, 1.2rem + 4.6vw, 5.25rem);
+  --step-name: clamp(120px, 17vw, 300px);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --stagger-line: 90ms;
+  --stagger-item: 70ms;
+}
+
+@media (max-width: 640px) {
+  :root { --margin: 16px; --gutter: 16px; --step-name: 21vw; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+html { color-scheme: dark; background: #0f0e0d; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: var(--step-body);
+  line-height: 1.5;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, canvas, video { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+p { margin: 0; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+/* Links: underline arrives on hover, never shifts the text. */
+.nav a, .nav button, .facts a, .footer a, .row a.row__main {
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 0.07em;
+  transition: text-decoration-color var(--t-hover) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav a:hover, .nav button:hover, .facts a:hover, .footer a:hover, .row a.row__main:hover { text-decoration-color: currentColor; }
+}
+
+/* ---------- Hero: the name behind him, the torso fading into the dark ---------- */
+
+.hero {
+  --fade: 78%;
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+  padding: 0 var(--margin);
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.nav {
+  position: absolute;
+  z-index: 4;
+  top: 24px;
+  right: var(--margin);
+  display: flex;
+  gap: 1.5em;
+  font-size: var(--step-small);
+}
+.nav button { padding: 0; border: 0; background: none; cursor: pointer; }
+.js .nav button[aria-pressed="true"] { text-decoration-color: currentColor; }
+html:not(.js) .nav button { display: none; }
+
+.hero__name {
+  position: absolute;
+  z-index: 1;
+  left: var(--margin);
+  right: var(--margin);
+  top: 34%;
+  text-align: center;
+  translate: 0 -50%;
+}
+
+.portrait {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 0;
+  height: 96%;
+  aspect-ratio: 1199 / 1492;
+  margin: 0;
+  translate: -50% 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 var(--fade), transparent calc(var(--fade) + 20%));
+          mask-image: linear-gradient(to bottom, #000 var(--fade), transparent calc(var(--fade) + 20%));
+}
+.portrait img, .portrait canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.portrait canvas { pointer-events: none; }
+.hero__ring { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+
+.hero__row {
+  position: absolute;
+  z-index: 3;
+  left: var(--margin);
+  right: var(--margin);
+  bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--gutter);
+}
+.hero__lede { max-width: 26ch; font-size: max(1.125rem, var(--step-body)); }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.button:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { background: var(--ink); color: var(--bg); }
+}
+
+.hero__name, .footer__name {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--step-name);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+}
+.line { display: inline-block; }
+
+@media (max-width: 640px) {
+  .hero { min-height: 560px; }
+  .hero__name { top: 24%; }
+  .portrait { height: 78%; }
+  .hero__row { flex-direction: column; align-items: flex-start; gap: 14px; bottom: 20px; }
+  .hero__name .line, .footer__name .line { display: block; width: max-content; margin-inline: auto; }
+  .footer__name .line { margin-inline: 0; }
+}
+
+/* ---------- About: a short hello beside a real photo ---------- */
+
+.about { padding: 0; }
+.about__card {                                   /* full bleed: the grey is the section, not a box in the middle */
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  min-height: min(92svh, 900px);
+  background: var(--surface);
+}
+.about__text { display: flex; flex-direction: column; justify-content: center; gap: 32px; padding: clamp(40px, 7vw, 120px) var(--margin) clamp(40px, 7vw, 120px) max(var(--margin), 7vw); }
+.about__title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(3.5rem, 7vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.about__body { max-width: 26ch; font-size: clamp(1.375rem, 1rem + 1.6vw, 2.5rem); line-height: 1.32; }
+.about__photo { margin: 0; }
+.about__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 760px) {
+  .about__card { grid-template-columns: 1fr; min-height: 0; }
+  .about__photo { order: -1; aspect-ratio: 4 / 5; }
+  .about__body { font-size: 1.25rem; }
+}
+
+/* ---------- Work: a 3D loop of reels ---------- */
+
+.work { padding: 120px 0 140px; overflow: hidden; }
+.work { position: relative; }
+.work__head { padding: 0 var(--margin); text-align: center; }
+.work__title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--step-lead);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.work__cat { font-family: var(--display); font-size: var(--step-head); line-height: 1; letter-spacing: -0.02em; text-align: center; }
+/* the section label sits in the top-left corner, on the same inset as About and Contact */
+.work__head .work__title { position: absolute; top: 40px; left: max(var(--margin), 7vw); font-size: clamp(1.75rem, 1rem + 2vw, 3rem); }
+
+.reels {
+  position: relative;
+  height: clamp(460px, 52vw, 640px);
+  margin-top: 40px;
+  perspective: 1400px;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  outline-offset: -4px;
+}
+.reels:active { cursor: grabbing; }
+.reels__track { position: absolute; inset: 0; transform-style: preserve-3d; }
+.reel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(190px, 21vw, 300px);
+  aspect-ratio: 9 / 16;
+  margin: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--surface);
+  transform: translate(-50%, -50%);
+  will-change: transform, filter;
+}
+.reel video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.reel__play {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 64px; height: 64px;
+  translate: -50% -50%;
+  display: grid; place-items: center;
+  border: 0; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink);
+  opacity: 0; scale: .8;
+  transition: opacity 200ms ease, scale 240ms var(--ease-out);
+  pointer-events: none;
+}
+.reel__play svg { width: 26px; height: 26px; margin-left: 3px; }
+.reel.is-front .reel__play { opacity: 1; scale: 1; }
+.reel.is-front.is-playing .reel__play { opacity: 0; scale: .8; }
+.reel__cap {
+  position: absolute; left: 14px; bottom: 12px;
+  font-size: var(--step-small); color: #fff;
+  opacity: 0; transition: opacity 200ms ease;
+}
+.reel.is-front .reel__cap { opacity: .9; }
+
+.reels__nav { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 28px; padding: 0 var(--margin); }
+.reels__hint { font-size: var(--step-small); color: var(--muted); text-align: center; }
+.reels__btn {
+  display: grid; place-items: center;
+  width: 48px; height: 48px;
+  border: 0; border-radius: 50%;
+  background: var(--surface); color: var(--ink);
+  cursor: pointer;
+  transition: background-color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
+}
+.reels__btn svg { width: 20px; height: 20px; }
+.reels__btn:active { transform: scale(.94); }
+@media (hover: hover) and (pointer: fine) { .reels__btn:hover { background: var(--field-1); } }
+
+@media (max-width: 640px) {
+  .work { padding: 88px 0 100px; }
+  .work__head .work__title { position: static; margin-bottom: 12px; }
+  .reels { height: 470px; margin-top: 28px; }
+  .reel { width: 58vw; border-radius: 18px; }
+}
+
+/* ---------- Contact: a business card, laid out like the reference ---------- */
+
+.contact { padding: 0; }
+.contact__card {                                 /* full bleed, like the About section */
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 0.9fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: min(92svh, 900px);
+  background: var(--field-1);
+}
+.contact__title {
+  grid-column: 1; grid-row: 1 / -1;
+  align-self: center;
+  margin: 0;
+  padding: clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px) max(var(--margin), 7vw);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(4.5rem, 12vw, 13rem);
+  line-height: .85;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.contact__title span { display: block; }
+.contact__who { grid-column: 2; grid-row: 1; padding: clamp(28px, 4vw, 56px) clamp(24px, 3vw, 48px) 0 24px; text-align: right; }
+.contact__name { font-weight: 500; font-size: clamp(1.75rem, 1rem + 2.6vw, 3.5rem); line-height: 1.05; }
+.contact__handle { margin-top: 10px; color: var(--muted); font-size: clamp(1rem, .8rem + .7vw, 1.4rem); }
+.contact__links { list-style: none; margin: 18px 0 0; padding: 0; display: flex; justify-content: flex-end; gap: 22px; font-size: clamp(1rem, .8rem + .7vw, 1.4rem); }
+.contact__mail {
+  grid-column: 2; grid-row: 3;
+  justify-self: end;
+  padding: 0 clamp(24px, 3vw, 48px) clamp(28px, 4vw, 56px) 24px;
+  font-size: clamp(1.25rem, .9rem + 1.3vw, 2.1rem);
+  text-decoration-line: underline; text-decoration-color: transparent; text-underline-offset: .22em;
+  transition: text-decoration-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.contact__links a { text-decoration-line: underline; text-decoration-color: transparent; text-underline-offset: .22em; transition: text-decoration-color var(--t-hover) ease; }
+@media (hover: hover) and (pointer: fine) {
+  .contact__mail:hover, .contact__links a:hover { text-decoration-color: currentColor; }
+  .contact__mail:hover { color: var(--accent); }
+}
+.contact__photo { grid-column: 3; grid-row: 1 / -1; margin: 0; }
+.contact__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 760px) {
+  .contact__card { grid-template-columns: 1fr; grid-template-rows: none; min-height: 0; }
+  .contact__photo { grid-column: 1; grid-row: 1; aspect-ratio: 4 / 5; }
+  .contact__title { grid-column: 1; grid-row: 2; padding: 28px 24px 8px; font-size: 22vw; }
+  .contact__who { grid-column: 1; grid-row: 3; text-align: left; padding: 16px 24px 0; }
+  .contact__links { justify-content: flex-start; }
+  .contact__mail { grid-column: 1; grid-row: 4; justify-self: start; padding: 20px 24px 32px; }
+}
+
+/* ---------- Footer: the name again, inverted ---------- */
+
+.footer { overflow: hidden; padding: 56px var(--margin) 24px; background: var(--ink); color: var(--bg); }
+.footer__name { transform-origin: 0 100%; padding-bottom: 0.17em; }
+.footer__row { display: flex; justify-content: space-between; gap: var(--gutter); margin-top: 32px; font-size: var(--step-small); }
+
+/* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-load] { opacity: 0; translate: 0 14px; animation: rise 600ms var(--ease-out) forwards; animation-delay: var(--d, 0ms); }
+  .js .hero__name [data-line] { opacity: 0; translate: 0 0.16em; animation: rise 900ms var(--ease-expo) forwards; animation-delay: calc(120ms + var(--i) * var(--stagger-line)); }
+  .js .portrait { opacity: 0; translate: -50% 3%; animation: portrait-in 1100ms var(--ease-expo) 60ms forwards; }
+
+  .js [data-reveal] {
+    opacity: 0;
+    translate: 0 24px;
+    transition: opacity 700ms var(--ease-out), translate 900ms var(--ease-expo);
+    transition-delay: calc(var(--i, 0) * var(--stagger-item));
+  }
+  .js [data-reveal].is-in { opacity: 1; translate: 0 0; }
+}
+@keyframes rise { to { opacity: 1; translate: 0 0; } }
+@keyframes portrait-in { to { opacity: 1; translate: -50% 0; } }
+
+/* The monument is heavy: it sinks a few percent as the first screen leaves, and the footer settles in. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__name { animation: recede linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+    .footer__name { animation: arrive linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
+  }
+}
+@keyframes recede { to { scale: 0.94; } }
+@keyframes arrive { from { scale: 0.94; } to { scale: 1; } }
